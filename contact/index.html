@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact Us — Walton Power Lines</title>
-  <meta name="description" content="Send a note about phased undergrounding in Walton County. It is not a vote or a petition.">
+  <title>Contact Walton Power Lines</title>
+  <meta name="description" content="Questions or comments from residents, owners, businesses, and visitors. The form is not a petition, a vote, or a pledge.">
   <link rel="canonical" href="https://waltonpowerlines.com/contact/">
-  <meta property="og:title" content="Contact Us — Walton Power Lines">
-  <meta property="og:description" content="Send a note about phased undergrounding in Walton County. It is not a vote or a petition.">
+  <meta property="og:title" content="Contact Walton Power Lines">
+  <meta property="og:description" content="Questions or comments from residents, owners, businesses, and visitors. The form is not a petition, a vote, or a pledge.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://waltonpowerlines.com/contact/">
   <meta property="og:image" content="https://waltonpowerlines.com/images/og.png">
@@ -26,8 +26,8 @@
     <header class="page-hero">
       <div class="wrap">
         <p class="kicker">Contact Us</p>
-        <h1>A note, not a vote</h1>
-        <p class="lede">If you live, work, or own property in Walton County, you can send a note. It does not sign a petition, set a tax, or tell the county commission how to vote.</p>
+        <h1>Questions or comments?</h1>
+        <p class="lede">Residents, property owners, business owners, and visitors are welcome to send a question or a comment. This form does not sign a petition, create a vote, pledge money, support a tax, or enroll anyone in a project.</p>
       </div>
     </header>
 
@@ -51,12 +51,24 @@
           <input id="name" name="name" type="text" autocomplete="name" required maxlength="80">
           <label for="email">Email</label>
           <input id="email" name="email" type="email" autocomplete="email" required maxlength="254">
-          <label for="message">Message <span class="note">(optional)</span></label>
-          <textarea id="message" name="message" maxlength="4000"></textarea>
+          <label for="community">Community or neighborhood <span class="note">(optional)</span></label>
+          <input id="community" name="community" type="text" maxlength="120" autocomplete="address-level2">
+          <label for="role">I am a <span class="note">(optional)</span></label>
+          <select id="role" name="role">
+            <option value="">Choose one</option>
+            <option>Resident</option>
+            <option>Property owner</option>
+            <option>Business owner</option>
+            <option>Visitor</option>
+            <option>Other</option>
+          </select>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required maxlength="4000"></textarea>
           <div class="actions">
             <button class="btn" type="submit">Submit</button>
           </div>
           <p class="form-status" data-form-status role="status" aria-live="polite" hidden></p>
+          <p class="note">Your email is not published on this site. Submitting this form does not subscribe you to a list.</p>
         </form>
       </div>
     </section>

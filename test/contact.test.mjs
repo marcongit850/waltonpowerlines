@@ -104,6 +104,28 @@ await check("sends a note through Resend", async () => {
   assert.equal(fetchCalls[0].init.headers.authorization, `Bearer ${API_KEY}`);
 });
 
+await check("includes community and role when provided", async () => {
+  installFetch(async () => okResend());
+  const { response } = await post({
+    ...valid,
+    community: "Grayton Beach",
+    role: "Resident",
+  }, { ip: "203.0.113.49" });
+  assert.equal(response.status, 200);
+  const payload = JSON.parse(fetchCalls[0].init.body);
+  assert.match(payload.text, /Community or neighborhood: Grayton Beach/);
+  assert.match(payload.text, /I am a: Resident/);
+  assert.equal(payload.text.includes("Supports a feasibility study"), false);
+});
+
+await check("rejects a note with no message", async () => {
+  installFetch(async () => { throw new Error("should not send"); });
+  const { response, json } = await post({ ...valid, message: "  " }, { ip: "203.0.113.50" });
+  assert.equal(response.status, 400);
+  assert.match(json.error, /message/i);
+  assert.equal(fetchCalls.length, 0);
+});
+
 await check("ignores removed place and study fields", async () => {
   installFetch(async () => okResend());
   const { response } = await post(valid, { ip: "203.0.113.41" });

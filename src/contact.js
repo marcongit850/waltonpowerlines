@@ -139,13 +139,17 @@ function resendFailure(status, result) {
   return { status: 502, error: "Could not send that note. Please try again." };
 }
 
+const ROLES = new Set(["Resident", "Property owner", "Business owner", "Visitor", "Other"]);
+
 function noteText(fields) {
-  return [
+  const lines = [
     `Name: ${fields.name}`,
     `Email: ${fields.email}`,
-    "",
-    fields.message || "(no message)",
-  ].join("\n");
+  ];
+  if (fields.community) lines.push(`Community or neighborhood: ${fields.community}`);
+  if (fields.role) lines.push(`I am a: ${fields.role}`);
+  lines.push("", fields.message);
+  return lines.join("\n");
 }
 
 export async function handleContact(request, env = {}) {
@@ -209,6 +213,8 @@ export async function handleContact(request, env = {}) {
 
   const name = singleLine(data.name);
   const email = singleLine(data.email);
+  const community = singleLine(data.community);
+  const role = ROLES.has(singleLine(data.role)) ? singleLine(data.role) : "";
   const message = String(data.message ?? "").replace(/\u0000/g, "").trim();
 
   if (!name || !email) {
@@ -217,6 +223,12 @@ export async function handleContact(request, env = {}) {
   if (name.length > 80) return reply({ ok: false, error: "That name is too long." }, 400);
   if (!EMAIL_RE.test(email) || email.length > 254) {
     return reply({ ok: false, error: "Please enter a valid email address." }, 400);
+  }
+  if (community.length > 120) {
+    return reply({ ok: false, error: "That community name is too long." }, 400);
+  }
+  if (!message) {
+    return reply({ ok: false, error: "Please add a message." }, 400);
   }
   if (message.length > 4000) return reply({ ok: false, error: "That message is too long." }, 400);
 
@@ -235,7 +247,7 @@ export async function handleContact(request, env = {}) {
     to: [to],
     reply_to: email,
     subject: `Walton Power Lines note from ${name}`,
-    text: noteText({ name, email, message }),
+    text: noteText({ name, email, community, role, message }),
   };
 
   let upstream;
