@@ -216,13 +216,6 @@ a:hover { color: var(--navy); }
   margin: 1rem 0 0;
 }
 
-.hero-note {
-  margin: 1.25rem 0 0;
-  color: #d5e4ea;
-  font-size: 0.92rem;
-  max-width: 40rem;
-}
-
 .hero-actions, .actions {
   display: flex;
   flex-wrap: wrap;
@@ -460,19 +453,6 @@ a:hover { color: var(--navy); }
 
 .photo-band img { max-height: 280px; object-position: center 60%; }
 
-.photo-break figcaption, .photo-band figcaption {
-  margin-top: 0.45rem;
-  color: var(--muted);
-  font-size: 0.84rem;
-}
-
-.hero .photo-credit {
-  margin: 1.3rem 0 0;
-  max-width: 40rem;
-  color: rgba(247, 244, 238, 0.82);
-  font-size: 0.78rem;
-}
-
 .diagram svg, .map-frame svg { display: block; width: 100%; height: auto; }
 
 .diagram figcaption, .map-frame figcaption {
@@ -498,7 +478,7 @@ a:hover { color: var(--navy); }
 
 .faq-list summary:hover { color: var(--teal-deep); }
 
-.form-card { padding: 1.2rem; }
+.form-card { padding: 1.2rem; max-width: 36rem; }
 
 label { display: block; font-weight: 700; color: var(--navy); margin-top: 0.9rem; }
 

@@ -26,7 +26,7 @@
     { href: root + "cost-funding/", label: "Cost", current: path.indexOf("/cost-funding/") !== -1 },
     { href: root + "examples/", label: "Examples", current: path.indexOf("/examples/") !== -1 },
     { href: root + "faq/", label: "FAQ", current: path.indexOf("/faq/") !== -1 },
-    { href: root + "get-involved/", label: "Get involved", current: path.indexOf("/get-involved/") !== -1 }
+    { href: root + "contact/", label: "Contact Us", current: path.indexOf("/contact/") !== -1 }
   ];
 
   var links = pages.map(function (page) {

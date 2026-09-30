@@ -14,7 +14,7 @@ From the repository root:
 python3 -m http.server 8080
 ```
 
-Open `http://localhost:8080/`. That server only shows the static pages. The interest form is delivered by the Worker in `src/worker.js`.
+Open `http://localhost:8080/`. That server only shows the static pages. The contact form is delivered by the Worker in `src/worker.js`.
 
 ```bash
 npm install
@@ -51,18 +51,9 @@ Until those values are set, `POST /api/contact` returns HTTP 503. The form still
 
 The header uses `images/logo-lockup.png` (the circular mark, wordmark, and tagline, with the flat white field removed). Favicons, the apple-touch icon, and `images/og.png` use the circular mark. Alt text on the header image is “Walton Power Lines”.
 
-## Photographs
-
-The photos are existing Wikimedia Commons files, resized and compressed for the web. Captions on the pages name the photographer and license.
-
-- Homepage: [Traffic light at CR 30A and US 98 in Inlet Beach](https://commons.wikimedia.org/wiki/File:Traffic_light_at_CR30A_and_US98_in_Inlet_Beach.jpg), The Bushranger, CC BY-SA 4.0. Daytime roadside at the east end of Scenic Highway 30A, with overhead lines in the frame. A dusk frame of this same junction was not available under a free license.
-- Why: [Grayton Beach](https://commons.wikimedia.org/wiki/File:Grayton_beach.jpg), Larry D. Moore, CC BY 4.0.
-- Where to start: [CR 30A bridge over Western Lake](https://commons.wikimedia.org/wiki/File:CR30A_bridge_over_Western_Lake.jpg), The Bushranger, CC BY-SA 4.0.
-- Get involved: [Miramar Beach, Florida](https://commons.wikimedia.org/wiki/File:Miramar_Beach,_Florida.JPG), Skye Marthaler, CC BY-SA 4.0.
-
 ## Pages
 
-- `/` — the long-term idea, from why it matters through how to get involved
+- `/` — the long-term idea, from why it matters through Contact Us
 - `/why/` — benefits and limits
 - `/phased-approach/` — corridor by corridor, bundled with other street work
 - `/where-to-start/` — 30A and Miramar Beach as a suggested study focus
@@ -72,7 +63,7 @@ The photos are existing Wikimedia Commons files, resized and compressed for the 
 - `/examples/` — sourced programs elsewhere
 - `/maps/` — a schematic only
 - `/documents/` — empty library
-- `/get-involved/` — interest form. It posts to `/api/contact`
+- `/contact/` — contact form. It posts to `/api/contact`. `/get-involved/` redirects here.
 
 ## Example sources used
 

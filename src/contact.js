@@ -55,7 +55,7 @@ function html(body, status) {
   <main>
     <h1>${escapeHtml(heading)}</h1>
     <p>${escapeHtml(text)}</p>
-    <p><a href="/get-involved/">Back to the form</a></p>
+    <p><a href="/contact/">Back to the form</a></p>
   </main>
 </body>
 </html>`;
@@ -143,8 +143,6 @@ function noteText(fields) {
   return [
     `Name: ${fields.name}`,
     `Email: ${fields.email}`,
-    `Neighborhood or community: ${fields.place || "(not given)"}`,
-    `Supports a feasibility study: ${fields.study ? "Yes" : "No"}`,
     "",
     fields.message || "(no message)",
   ].join("\n");
@@ -211,9 +209,7 @@ export async function handleContact(request, env = {}) {
 
   const name = singleLine(data.name);
   const email = singleLine(data.email);
-  const place = singleLine(data.place);
   const message = String(data.message ?? "").replace(/\u0000/g, "").trim();
-  const study = singleLine(data.study).toLowerCase() === "yes";
 
   if (!name || !email) {
     return reply({ ok: false, error: "Please add your name and email." }, 400);
@@ -222,7 +218,6 @@ export async function handleContact(request, env = {}) {
   if (!EMAIL_RE.test(email) || email.length > 254) {
     return reply({ ok: false, error: "Please enter a valid email address." }, 400);
   }
-  if (place.length > 120) return reply({ ok: false, error: "That place name is too long." }, 400);
   if (message.length > 4000) return reply({ ok: false, error: "That message is too long." }, 400);
 
   const to = typeof env.CONTACT_EMAIL === "string" ? env.CONTACT_EMAIL.trim() : "";
@@ -240,7 +235,7 @@ export async function handleContact(request, env = {}) {
     to: [to],
     reply_to: email,
     subject: `Walton Power Lines note from ${name}`,
-    text: noteText({ name, email, place, message, study }),
+    text: noteText({ name, email, message }),
   };
 
   let upstream;

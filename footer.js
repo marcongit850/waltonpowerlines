@@ -23,7 +23,7 @@
     { href: root + "faq/", label: "FAQ" },
     { href: root + "maps/", label: "Maps" },
     { href: root + "documents/", label: "Documents" },
-    { href: root + "get-involved/", label: "Get involved" }
+    { href: root + "contact/", label: "Contact Us" }
   ];
 
   var links = pages.map(function (page) {
