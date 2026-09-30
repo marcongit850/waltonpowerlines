@@ -12,13 +12,17 @@ const pages = [
   ["examples/index.html", "https://waltonpowerlines.com/examples/"],
   ["maps/index.html", "https://waltonpowerlines.com/maps/"],
   ["documents/index.html", "https://waltonpowerlines.com/documents/"],
-  ["get-involved/index.html", "https://waltonpowerlines.com/get-involved/"],
+  ["contact/index.html", "https://waltonpowerlines.com/contact/"],
   ["404.html", null]
 ];
 
 const home = readFileSync("index.html", "utf8");
 assert.match(home, /<h1>A Long-Term Plan for Undergrounding Walton County’s Power Lines<\/h1>/);
 assert.match(home, /<p class="subhead">Exploring a practical, phased approach to moving overhead utilities underground — one corridor and community at a time\.<\/p>/);
+assert.match(home, /<h2>Contact Us<\/h2>/);
+assert.match(home, /href="contact\/">Contact Us</);
+assert.equal(home.includes("Get involved"), false);
+assert.equal(home.includes("get-involved"), false);
 
 const footer = readFileSync("footer.js", "utf8");
 assert.match(footer, /not an official Walton County project/);
@@ -51,7 +55,7 @@ for (const loc of [
   "https://waltonpowerlines.com/examples/",
   "https://waltonpowerlines.com/maps/",
   "https://waltonpowerlines.com/documents/",
-  "https://waltonpowerlines.com/get-involved/"
+  "https://waltonpowerlines.com/contact/"
 ]) {
   assert.ok(sitemap.includes(loc), loc);
 }
@@ -77,13 +81,17 @@ for (const host of [
   assert.ok(examples.includes(host), host);
 }
 
-const involved = readFileSync("get-involved/index.html", "utf8");
-assert.match(involved, /action="\/api\/contact"/);
-assert.match(involved, /feasibility study/);
-assert.match(involved, />Submit</);
-assert.equal(involved.includes("mailto:"), false);
-assert.equal(involved.includes("hello@"), false);
-assert.equal(involved.includes("No account is required"), false);
+const contactPage = readFileSync("contact/index.html", "utf8");
+assert.match(contactPage, /<title>Contact Us — Walton Power Lines<\/title>/);
+assert.match(contactPage, /<p class="kicker">Contact Us<\/p>/);
+assert.match(contactPage, /action="\/api\/contact"/);
+assert.match(contactPage, /feasibility study/);
+assert.match(contactPage, />Submit</);
+assert.equal(contactPage.includes("mailto:"), false);
+assert.equal(contactPage.includes("hello@"), false);
+assert.equal(contactPage.includes("No account is required"), false);
+assert.equal(contactPage.includes("Get involved"), false);
+assert.equal(existsSync("get-involved/index.html"), false);
 
 const site = readFileSync("site.js", "utf8");
 assert.match(site, /\/api\/contact/);
@@ -98,6 +106,14 @@ assert.match(footer, /not an official Walton County project/);
 const header = readFileSync("header.js", "utf8");
 assert.match(header, /alt="Walton Power Lines"/);
 assert.match(header, /images\/logo-lockup\.png/);
+assert.match(header, /href: root \+ "contact\/", label: "Contact Us"/);
+assert.match(footer, /href: root \+ "contact\/", label: "Contact Us"/);
+assert.equal(header.includes("get-involved"), false);
+assert.equal(footer.includes("get-involved"), false);
+
+const redirects = readFileSync("_redirects", "utf8");
+assert.match(redirects, /\/get-involved \/contact\/ 301/);
+assert.match(redirects, /\/get-involved\/ \/contact\/ 301/);
 
 const faq = readFileSync("faq/index.html", "utf8");
 assert.match(faq, /<h1>Common questions<\/h1>/);
@@ -129,7 +145,7 @@ for (const asset of [
 assert.equal(existsSync("favicon.svg"), false);
 
 const banned = ["hello@waltonpowerlines.com", "mailto:", "Updated September", "No account is required"];
-for (const file of ["index.html", "footer.js", "header.js", "site.js", "get-involved/index.html", "faq/index.html", "README.md", "styles.css"]) {
+for (const file of ["index.html", "footer.js", "header.js", "site.js", "contact/index.html", "faq/index.html", "README.md", "styles.css"]) {
   const text = readFileSync(file, "utf8");
   for (const phrase of banned) {
     assert.equal(text.includes(phrase), false, file + " contains " + phrase);

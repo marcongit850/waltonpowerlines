@@ -53,7 +53,7 @@ The header uses `images/logo-lockup.png` (the circular mark, wordmark, and tagli
 
 ## Pages
 
-- `/` — the long-term idea, from why it matters through how to get involved
+- `/` — the long-term idea, from why it matters through Contact Us
 - `/why/` — benefits and limits
 - `/phased-approach/` — corridor by corridor, bundled with other street work
 - `/where-to-start/` — 30A and Miramar Beach as a suggested study focus
@@ -63,7 +63,7 @@ The header uses `images/logo-lockup.png` (the circular mark, wordmark, and tagli
 - `/examples/` — sourced programs elsewhere
 - `/maps/` — a schematic only
 - `/documents/` — empty library
-- `/get-involved/` — interest form. It posts to `/api/contact`
+- `/contact/` — interest form. It posts to `/api/contact`. `/get-involved/` redirects here.
 
 ## Example sources used
 

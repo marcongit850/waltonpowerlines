@@ -55,7 +55,7 @@ function html(body, status) {
   <main>
     <h1>${escapeHtml(heading)}</h1>
     <p>${escapeHtml(text)}</p>
-    <p><a href="/get-involved/">Back to the form</a></p>
+    <p><a href="/contact/">Back to the form</a></p>
   </main>
 </body>
 </html>`;
