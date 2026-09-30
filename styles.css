@@ -460,19 +460,6 @@ a:hover { color: var(--navy); }
 
 .photo-band img { max-height: 280px; object-position: center 60%; }
 
-.photo-break figcaption, .photo-band figcaption {
-  margin-top: 0.45rem;
-  color: var(--muted);
-  font-size: 0.84rem;
-}
-
-.hero .photo-credit {
-  margin: 1.3rem 0 0;
-  max-width: 40rem;
-  color: rgba(247, 244, 238, 0.82);
-  font-size: 0.78rem;
-}
-
 .diagram svg, .map-frame svg { display: block; width: 100%; height: auto; }
 
 .diagram figcaption, .map-frame figcaption {

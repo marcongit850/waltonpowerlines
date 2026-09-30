@@ -51,15 +51,6 @@ Until those values are set, `POST /api/contact` returns HTTP 503. The form still
 
 The header uses `images/logo-lockup.png` (the circular mark, wordmark, and tagline, with the flat white field removed). Favicons, the apple-touch icon, and `images/og.png` use the circular mark. Alt text on the header image is “Walton Power Lines”.
 
-## Photographs
-
-The photos are existing Wikimedia Commons files, resized and compressed for the web. Captions on the pages name the photographer and license.
-
-- Homepage: [Traffic light at CR 30A and US 98 in Inlet Beach](https://commons.wikimedia.org/wiki/File:Traffic_light_at_CR30A_and_US98_in_Inlet_Beach.jpg), The Bushranger, CC BY-SA 4.0. Daytime roadside at the east end of Scenic Highway 30A, with overhead lines in the frame. A dusk frame of this same junction was not available under a free license.
-- Why: [Grayton Beach](https://commons.wikimedia.org/wiki/File:Grayton_beach.jpg), Larry D. Moore, CC BY 4.0.
-- Where to start: [CR 30A bridge over Western Lake](https://commons.wikimedia.org/wiki/File:CR30A_bridge_over_Western_Lake.jpg), The Bushranger, CC BY-SA 4.0.
-- Get involved: [Miramar Beach, Florida](https://commons.wikimedia.org/wiki/File:Miramar_Beach,_Florida.JPG), Skye Marthaler, CC BY-SA 4.0.
-
 ## Pages
 
 - `/` — the long-term idea, from why it matters through how to get involved
