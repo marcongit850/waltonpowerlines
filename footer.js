@@ -22,7 +22,7 @@
     { href: root + "examples/", label: "Examples" },
     { href: root + "faq/", label: "FAQ" },
     { href: root + "maps/", label: "Maps" },
-    { href: root + "documents/", label: "Documents" },
+    { href: root + "documents/", label: "Research &amp; Documents" },
     { href: root + "contact/", label: "Contact Us" }
   ];
 
@@ -31,12 +31,18 @@
   }).join("\n      ");
 
   script.insertAdjacentHTML("beforebegin", [
+    '<aside class="site-disclaimer">',
+    '  <div class="wrap">',
+    "    <p>Independent civic information site. Walton Power Lines is not affiliated with Walton County, FPL, CHELCO, or any other utility. No undergrounding project, tax, assessment, budget, or construction schedule has been adopted.</p>",
+    "  </div>",
+    "</aside>",
     '<footer class="site-footer">',
     '  <div class="wrap footer-grid">',
     "    <div>",
     '      <p class="footer-name">Walton Power Lines</p>',
-    "      <p>A plain-language look at a long-term idea: moving overhead power and utility lines underground in Walton County, Florida, one corridor at a time. Scenic Highway 30A and Miramar Beach are the suggested place to start a study.</p>",
-    '      <p class="legal">Civic education and exploration only. This is not an official Walton County project, not a utility project, and not an adopted policy. Nothing here is an endorsement by Walton County, a municipality, or any electric or communications utility. This site does not set a timeline, a budget, or a construction plan.</p>',
+    "      <p>A plain-language look at whether phased undergrounding in Walton County deserves a feasibility study.</p>",
+    '      <p class="legal">Independent civic information site.</p>',
+    '      <p class="copyright">© 2026 Walton Power Lines</p>',
     "    </div>",
     '    <nav class="footer-nav" aria-label="Footer">',
     "      " + links,

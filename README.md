@@ -62,7 +62,7 @@ The header uses `images/logo-lockup.png` (the circular mark, wordmark, and tagli
 - `/faq/`
 - `/examples/` — sourced programs elsewhere
 - `/maps/` — a schematic only
-- `/documents/` — empty library
+- `/documents/` — research links, plus a placeholder for Walton records that do not exist yet
 - `/contact/` — contact form. It posts to `/api/contact`. `/get-involved/` redirects here.
 
 ## Example sources used

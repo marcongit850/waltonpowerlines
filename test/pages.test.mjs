@@ -26,8 +26,9 @@ assert.equal(home.includes("get-involved"), false);
 assert.equal(home.includes("An independent civic explainer"), false);
 
 const footer = readFileSync("footer.js", "utf8");
-assert.match(footer, /not an official Walton County project/);
-assert.match(footer, /does not set a timeline, a budget, or a construction plan/);
+assert.match(footer, /Independent civic information site\. Walton Power Lines is not affiliated with Walton County, FPL, CHELCO, or any other utility\. No undergrounding project, tax, assessment, budget, or construction schedule has been adopted\./);
+assert.match(footer, /© 2026 Walton Power Lines/);
+assert.match(footer, /Research &amp; Documents/);
 
 for (const [file, canonical] of pages) {
   assert.ok(existsSync(file), file);
@@ -83,8 +84,15 @@ for (const host of [
 }
 
 const contactPage = readFileSync("contact/index.html", "utf8");
-assert.match(contactPage, /<title>Contact Us — Walton Power Lines<\/title>/);
+assert.match(contactPage, /<title>Contact Walton Power Lines<\/title>/);
+assert.match(contactPage, /<h1>Questions or comments\?<\/h1>/);
 assert.match(contactPage, /<p class="kicker">Contact Us<\/p>/);
+assert.match(contactPage, /name="community"/);
+assert.match(contactPage, /name="role"/);
+assert.match(contactPage, /Community or neighborhood/);
+assert.match(contactPage, /does not subscribe you to a list/);
+assert.match(contactPage, /not published on this site/);
+assert.equal(contactPage.includes("A note, not a vote"), false);
 assert.match(contactPage, /action="\/api\/contact"/);
 assert.match(contactPage, /<h2>Contact Us<\/h2>/);
 assert.match(contactPage, />Submit</);
@@ -108,7 +116,7 @@ assert.match(site, /Thank you\. Your note is on its way\./);
 assert.equal(footer.includes("mailto:"), false);
 assert.equal(footer.includes("hello@"), false);
 assert.equal(footer.includes("Updated September"), false);
-assert.match(footer, /not an official Walton County project/);
+assert.match(footer, /Independent civic information site/);
 
 const header = readFileSync("header.js", "utf8");
 assert.match(header, /alt="Walton Power Lines"/);
@@ -129,13 +137,44 @@ assert.equal(faq.includes("limits left in"), false);
 assert.equal(faq.includes("someone else’s data"), false);
 
 assert.match(home, /images\/hero-inlet-beach\.jpg/);
+assert.match(home, /What is actually being proposed\?/);
+assert.match(home, /A feasibility study — not a construction project\./);
+assert.match(home, /No construction project, tax, assessment, budget, utility commitment, or schedule has been adopted\./);
+assert.match(home, /Potential benefits — and tradeoffs/);
+assert.match(home, /Learn About Costs &amp; Funding/);
+assert.match(home, /See How Undergrounding Works/);
+assert.match(home, /See Real-World Examples/);
+assert.match(home, /Explore a Phased Approach/);
+assert.match(readFileSync("why/index.html", "utf8"), /Underground does not mean outage-proof/);
+assert.match(readFileSync("why/index.html", "utf8"), /Information and sources last reviewed September 2026/);
+assert.match(readFileSync("phased-approach/index.html", "utf8"), /Stopping is an acceptable outcome/);
+assert.match(readFileSync("how-it-works/index.html", "utf8"), /The wires move underground\. The equipment does not disappear\./);
+assert.match(readFileSync("cost-funding/index.html", "utf8"), /There is no Walton County price yet/);
+assert.match(readFileSync("cost-funding/index.html", "utf8"), /would largely be speculation/);
+assert.match(readFileSync("cost-funding/index.html", "utf8"), /Study first\. Funding decision later/);
+assert.match(faq, /What is actually being proposed right now\?/);
+assert.match(faq, /Is this a proposal to raise taxes\?/);
+assert.match(faq, /Undergrounding changes the risks\. It reduces exposure to wind, trees, and falling debris while introducing different repair, flooding, excavation, and equipment-access considerations\./);
+assert.equal(faq.includes("trades one set of problems"), false);
+const documents = readFileSync("documents/index.html", "utf8");
+assert.equal(documents.includes("The library is empty on purpose"), false);
+assert.match(documents, /Research &amp; Documents/);
+assert.match(documents, /These documents do not exist yet/);
+assert.match(documents, /Information and sources last reviewed September 2026/);
 const start = readFileSync("where-to-start/index.html", "utf8");
 assert.equal(start.includes("Miramar Beach sits at the eastern end"), false);
-assert.match(start, /Miramar Beach is at the western end/);
+assert.equal(start.includes("Miramar Beach is at the western end"), false);
+assert.match(start, /not the western end of Scenic Highway 30A/);
+assert.match(start, /near Dune Allen/);
+assert.match(start, /Miramar Beach lies west of the 30A corridor/);
 assert.match(start, /CHELCO/);
 const map = readFileSync("maps/index.html", "utf8");
 assert.match(map, /West is toward Miramar Beach/);
 assert.equal(map.includes("West is toward Inlet Beach"), false);
+assert.match(map, /Dune Allen/);
+assert.match(map, /Orientation only — not a proposed construction map/);
+assert.match(map, /These detailed maps do not exist yet/);
+assert.equal(map.includes("from Miramar Beach in the west"), false);
 assert.match(map, /Bay County/);
 assert.match(readFileSync("why/index.html", "utf8"), /images\/why-grayton-beach\.jpg/);
 assert.match(readFileSync("examples/index.html", "utf8"), /example-mark/);
