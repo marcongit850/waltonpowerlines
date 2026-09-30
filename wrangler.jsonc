@@ -1,0 +1,14 @@
+{
+  // Cloudflare Worker static assets for waltonpowerlines.com.
+  // Keep this name. A Workers Builds project deploys the Worker it is tied to.
+  // This version is assets-only: the interest form opens the visitor's email app.
+  // An assets-only Worker cannot hold variables or secrets. If a form endpoint is
+  // added later, add "main" and do not put secrets in this file.
+  "name": "waltonpowerlines",
+  "compatibility_date": "2026-09-30",
+  "assets": {
+    "directory": ".",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
