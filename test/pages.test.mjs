@@ -17,7 +17,7 @@ const pages = [
 ];
 
 const home = readFileSync("index.html", "utf8");
-assert.match(home, /<h1>A Long-Term Plan for Undergrounding Walton County’s Power Lines<\/h1>/);
+assert.match(home, /<h1>A Case for Studying Underground Power Lines in Walton County<\/h1>/);
 assert.match(home, /<p class="subhead">Exploring a practical, phased approach to moving overhead utilities underground — one corridor and community at a time\.<\/p>/);
 assert.match(home, /<h2>Contact Us<\/h2>/);
 assert.match(home, /href="contact\/">Contact Us</);
@@ -86,7 +86,7 @@ const contactPage = readFileSync("contact/index.html", "utf8");
 assert.match(contactPage, /<title>Contact Us — Walton Power Lines<\/title>/);
 assert.match(contactPage, /<p class="kicker">Contact Us<\/p>/);
 assert.match(contactPage, /action="\/api\/contact"/);
-assert.match(contactPage, /<h2>Contact us<\/h2>/);
+assert.match(contactPage, /<h2>Contact Us<\/h2>/);
 assert.match(contactPage, />Submit</);
 assert.equal(contactPage.includes("mailto:"), false);
 assert.equal(contactPage.includes("hello@"), false);
