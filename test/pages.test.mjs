@@ -23,6 +23,7 @@ assert.match(home, /<h2>Contact Us<\/h2>/);
 assert.match(home, /href="contact\/">Contact Us</);
 assert.equal(home.includes("Get involved"), false);
 assert.equal(home.includes("get-involved"), false);
+assert.equal(home.includes("An independent civic explainer"), false);
 
 const footer = readFileSync("footer.js", "utf8");
 assert.match(footer, /not an official Walton County project/);
@@ -85,12 +86,18 @@ const contactPage = readFileSync("contact/index.html", "utf8");
 assert.match(contactPage, /<title>Contact Us — Walton Power Lines<\/title>/);
 assert.match(contactPage, /<p class="kicker">Contact Us<\/p>/);
 assert.match(contactPage, /action="\/api\/contact"/);
-assert.match(contactPage, /feasibility study/);
+assert.match(contactPage, /<h2>Contact us<\/h2>/);
 assert.match(contactPage, />Submit</);
 assert.equal(contactPage.includes("mailto:"), false);
 assert.equal(contactPage.includes("hello@"), false);
 assert.equal(contactPage.includes("No account is required"), false);
 assert.equal(contactPage.includes("Get involved"), false);
+assert.equal(contactPage.includes("Interest form"), false);
+assert.equal(contactPage.includes("What this note is"), false);
+assert.equal(contactPage.includes("Neighborhood or community"), false);
+assert.equal(contactPage.includes("name=\"study\""), false);
+assert.equal(contactPage.includes("Say what community you are in"), false);
+assert.equal(contactPage.includes("Checking the study box"), false);
 assert.equal(existsSync("get-involved/index.html"), false);
 
 const site = readFileSync("site.js", "utf8");
@@ -122,6 +129,14 @@ assert.equal(faq.includes("limits left in"), false);
 assert.equal(faq.includes("someone else’s data"), false);
 
 assert.match(home, /images\/hero-inlet-beach\.jpg/);
+const start = readFileSync("where-to-start/index.html", "utf8");
+assert.equal(start.includes("Miramar Beach sits at the eastern end"), false);
+assert.match(start, /Miramar Beach is at the western end/);
+assert.match(start, /CHELCO/);
+const map = readFileSync("maps/index.html", "utf8");
+assert.match(map, /West is toward Miramar Beach/);
+assert.equal(map.includes("West is toward Inlet Beach"), false);
+assert.match(map, /Bay County/);
 assert.match(readFileSync("why/index.html", "utf8"), /images\/why-grayton-beach\.jpg/);
 assert.match(readFileSync("examples/index.html", "utf8"), /example-mark/);
 

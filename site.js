@@ -1,4 +1,4 @@
-// Shared page behavior. The interest form posts to the Worker contact route.
+// Shared page behavior. The contact form posts to the Worker contact route.
 (function () {
   var form = document.querySelector("[data-interest-form]");
   if (!form) return;

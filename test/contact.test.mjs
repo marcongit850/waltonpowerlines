@@ -95,19 +95,23 @@ await check("sends a note through Resend", async () => {
   assert.equal(payload.reply_to, "ada@example.com");
   assert.equal(payload.subject, "Walton Power Lines note from Ada Walton");
   assert.match(payload.text, /Name: Ada Walton/);
-  assert.match(payload.text, /Neighborhood or community: Miramar Beach/);
-  assert.match(payload.text, /Supports a feasibility study: Yes/);
+  assert.match(payload.text, /Email: ada@example.com/);
   assert.match(payload.text, /Please study 30A\./);
+  assert.equal(payload.text.includes("Neighborhood or community"), false);
+  assert.equal(payload.text.includes("Supports a feasibility study"), false);
+  assert.equal(payload.text.includes("Miramar Beach"), false);
   assert.equal(payload.text.includes(API_KEY), false);
   assert.equal(fetchCalls[0].init.headers.authorization, `Bearer ${API_KEY}`);
 });
 
-await check("records an unchecked study box as no", async () => {
+await check("ignores removed place and study fields", async () => {
   installFetch(async () => okResend());
-  const { response } = await post({ ...valid, study: "" }, { ip: "203.0.113.41" });
+  const { response } = await post(valid, { ip: "203.0.113.41" });
   assert.equal(response.status, 200);
   const payload = JSON.parse(fetchCalls[0].init.body);
-  assert.match(payload.text, /Supports a feasibility study: No/);
+  assert.equal(payload.text.includes("Neighborhood or community"), false);
+  assert.equal(payload.text.includes("Supports a feasibility study"), false);
+  assert.equal(payload.text.includes("Miramar Beach"), false);
 });
 
 await check("accepts a form post without JavaScript", async () => {

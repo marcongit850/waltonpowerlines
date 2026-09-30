@@ -63,7 +63,7 @@ The header uses `images/logo-lockup.png` (the circular mark, wordmark, and tagli
 - `/examples/` — sourced programs elsewhere
 - `/maps/` — a schematic only
 - `/documents/` — empty library
-- `/contact/` — interest form. It posts to `/api/contact`. `/get-involved/` redirects here.
+- `/contact/` — contact form. It posts to `/api/contact`. `/get-involved/` redirects here.
 
 ## Example sources used
 

@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact Us — Walton Power Lines</title>
-  <meta name="description" content="Send a note of interest about phased undergrounding in Walton County. It is not a vote or a petition.">
+  <meta name="description" content="Send a note about phased undergrounding in Walton County. It is not a vote or a petition.">
   <link rel="canonical" href="https://waltonpowerlines.com/contact/">
   <meta property="og:title" content="Contact Us — Walton Power Lines">
-  <meta property="og:description" content="Tell us where you live and whether you would support a feasibility study. It is not a vote or a petition.">
+  <meta property="og:description" content="Send a note about phased undergrounding in Walton County. It is not a vote or a petition.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://waltonpowerlines.com/contact/">
   <meta property="og:image" content="https://waltonpowerlines.com/images/og.png">
@@ -26,8 +26,8 @@
     <header class="page-hero">
       <div class="wrap">
         <p class="kicker">Contact Us</p>
-        <h1>A note of interest, not a vote</h1>
-        <p class="lede">If you live, work, or own property in Walton County, you can say so. Checking the study box means you would like a feasibility study. It does not sign a petition, set a tax, or tell the county commission how to vote.</p>
+        <h1>A note, not a vote</h1>
+        <p class="lede">If you live, work, or own property in Walton County, you can send a note. It does not sign a petition, set a tax, or tell the county commission how to vote.</p>
       </div>
     </header>
 
@@ -40,16 +40,9 @@
     </section>
 
     <section class="section">
-      <div class="wrap grid-2">
-        <div class="prose">
-          <h2>Send a note</h2>
-          <p>Say what community you are in, and whether your interest is reliability, the look of the road, or both. Specific outage stories help a future study ask the utilities better questions. They are not, by themselves, a construction request.</p>
-          <div class="callout">
-            <p><strong>What this note is.</strong> A message through the form on this page. Checking the study box is not a petition, not a vote, and not a pledge of money.</p>
-          </div>
-        </div>
+      <div class="wrap">
         <form class="form-card" data-interest-form action="/api/contact" method="post">
-          <h2>Interest form</h2>
+          <h2>Contact us</h2>
           <div class="hp" aria-hidden="true">
             <label for="company">Company</label>
             <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" value="">
@@ -58,14 +51,8 @@
           <input id="name" name="name" type="text" autocomplete="name" required maxlength="80">
           <label for="email">Email</label>
           <input id="email" name="email" type="email" autocomplete="email" required maxlength="254">
-          <label for="place">Neighborhood or community</label>
-          <input id="place" name="place" type="text" autocomplete="address-level3" maxlength="120">
           <label for="message">Message <span class="note">(optional)</span></label>
           <textarea id="message" name="message" maxlength="4000"></textarea>
-          <label class="check">
-            <input type="checkbox" name="study" value="yes">
-            <span>I would support a feasibility study of phased undergrounding in Walton County. This is not a vote and not a pledge of money.</span>
-          </label>
           <div class="actions">
             <button class="btn" type="submit">Submit</button>
           </div>

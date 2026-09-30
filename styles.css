@@ -216,13 +216,6 @@ a:hover { color: var(--navy); }
   margin: 1rem 0 0;
 }
 
-.hero-note {
-  margin: 1.25rem 0 0;
-  color: #d5e4ea;
-  font-size: 0.92rem;
-  max-width: 40rem;
-}
-
 .hero-actions, .actions {
   display: flex;
   flex-wrap: wrap;
@@ -485,7 +478,7 @@ a:hover { color: var(--navy); }
 
 .faq-list summary:hover { color: var(--teal-deep); }
 
-.form-card { padding: 1.2rem; }
+.form-card { padding: 1.2rem; max-width: 36rem; }
 
 label { display: block; font-weight: 700; color: var(--navy); margin-top: 0.9rem; }
 
