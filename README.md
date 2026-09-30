@@ -53,7 +53,7 @@ The header uses `images/logo-lockup.png` (the circular mark, wordmark, and tagli
 
 ## Pages
 
-- `/` — the long-term idea, from why it matters through Contact Us
+- `/` — the long-term idea, from why it matters through the FAQ
 - `/why/` — benefits and limits
 - `/phased-approach/` — corridor by corridor, bundled with other street work
 - `/where-to-start/` — 30A and Miramar Beach as a suggested study focus

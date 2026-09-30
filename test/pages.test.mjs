@@ -19,8 +19,9 @@ const pages = [
 const home = readFileSync("index.html", "utf8");
 assert.match(home, /<h1>A Case for Studying Underground Power Lines in Walton County<\/h1>/);
 assert.match(home, /<p class="subhead">Exploring a practical, phased approach to moving overhead utilities underground — one corridor and community at a time\.<\/p>/);
-assert.match(home, /<h2>Contact Us<\/h2>/);
-assert.match(home, /href="contact\/">Contact Us</);
+assert.equal(home.includes("<h2>Contact Us</h2>"), false);
+assert.equal(home.includes("It is not a vote, a petition to the commission, or a pledge of money."), false);
+assert.match(home, /class="btn btn-ghost" href="contact\/">Contact Us</);
 assert.equal(home.includes("Get involved"), false);
 assert.equal(home.includes("get-involved"), false);
 assert.equal(home.includes("An independent civic explainer"), false);
