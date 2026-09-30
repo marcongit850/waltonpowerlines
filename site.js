@@ -1,6 +1,6 @@
 // Shared page behavior. The contact form posts to the Worker contact route.
 (function () {
-  var form = document.querySelector("[data-interest-form]");
+  var form = document.querySelector("[data-contact-form]");
   if (!form) return;
 
   form.addEventListener("submit", function (event) {

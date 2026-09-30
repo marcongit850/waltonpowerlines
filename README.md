@@ -14,7 +14,7 @@ From the repository root:
 python3 -m http.server 8080
 ```
 
-Open `http://localhost:8080/`. That server only shows the static pages. The interest form is delivered by the Worker in `src/worker.js`.
+Open `http://localhost:8080/`. That server only shows the static pages. The contact form is delivered by the Worker in `src/worker.js`.
 
 ```bash
 npm install
