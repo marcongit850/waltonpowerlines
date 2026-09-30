@@ -1,39 +1,50 @@
-// Shared page behavior. The interest form opens the visitor's own email app.
+// Shared page behavior. The interest form posts to the Worker contact route.
 (function () {
-  var CONTACT = "hello@waltonpowerlines.com";
-
   var form = document.querySelector("[data-interest-form]");
   if (!form) return;
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
-    var data = new FormData(form);
-    var name = String(data.get("name") || "").trim();
-    var email = String(data.get("email") || "").trim();
-    var place = String(data.get("place") || "").trim();
-    var message = String(data.get("message") || "").trim();
-    var study = data.get("study") ? "Yes" : "No";
-
-    var lines = [
-      "Walton Power Lines — interest note",
-      "",
-      "Name: " + (name || "(not given)"),
-      "Email: " + (email || "(not given)"),
-      "Place in Walton County: " + (place || "(not given)"),
-      "Supports a feasibility study: " + study,
-      "",
-      message || "(no comment)"
-    ];
-
-    var href = "mailto:" + CONTACT
-      + "?subject=" + encodeURIComponent("Walton Power Lines interest")
-      + "&body=" + encodeURIComponent(lines.join("\n"));
-
     var status = form.querySelector("[data-form-status]");
+    var button = form.querySelector("button[type=submit]");
+    var data = {};
+    new FormData(form).forEach(function (value, key) {
+      data[key] = value;
+    });
+    if (button) button.disabled = true;
     if (status) {
       status.hidden = false;
-      status.textContent = "Your email app should open with this note. Nothing is stored on this website. If no app opens, write to " + CONTACT + ".";
+      status.classList.remove("is-error");
+      status.textContent = "Sending…";
     }
-    window.location.href = href;
+    fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accept: "application/json"
+      },
+      body: JSON.stringify(data)
+    }).then(function (response) {
+      return response.json().then(function (body) {
+        return { ok: response.ok, body: body };
+      }).catch(function () {
+        return { ok: response.ok, body: {} };
+      });
+    }).then(function (result) {
+      if (result.ok) {
+        form.reset();
+        if (status) status.textContent = "Thank you. Your note is on its way.";
+      } else if (status) {
+        status.classList.add("is-error");
+        status.textContent = (result.body && result.body.error) || "Could not send that note. Please try again.";
+      }
+    }).catch(function () {
+      if (status) {
+        status.classList.add("is-error");
+        status.textContent = "Could not send that note. Please try again.";
+      }
+    }).finally(function () {
+      if (button) button.disabled = false;
+    });
   });
 })();

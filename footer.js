@@ -37,7 +37,6 @@
     '      <p class="footer-name">Walton Power Lines</p>',
     "      <p>A plain-language look at a long-term idea: moving overhead power and utility lines underground in Walton County, Florida, one corridor at a time. Scenic Highway 30A and Miramar Beach are the suggested place to start a study.</p>",
     '      <p class="legal">Civic education and exploration only. This is not an official Walton County project, not a utility project, and not an adopted policy. Nothing here is an endorsement by Walton County, a municipality, or any electric or communications utility. This site does not set a timeline, a budget, or a construction plan.</p>',
-    '      <p class="footer-meta"><a href="mailto:hello@waltonpowerlines.com">hello@waltonpowerlines.com</a> · Updated September 2026</p>',
     "    </div>",
     '    <nav class="footer-nav" aria-label="Footer">',
     "      " + links,

@@ -8,15 +8,13 @@ The Worker name is **`waltonpowerlines`**. Leave that name in `wrangler.jsonc`. 
 
 ## Preview
 
-From the repository root, the static pages are enough. The interest form opens the visitor’s email app. It does not call a server.
+From the repository root:
 
 ```bash
 python3 -m http.server 8080
 ```
 
-Open `http://localhost:8080/`.
-
-The same pages through Wrangler:
+Open `http://localhost:8080/`. That server only shows the static pages. The interest form is delivered by the Worker in `src/worker.js`.
 
 ```bash
 npm install
@@ -33,17 +31,34 @@ Cloudflare Workers Builds deploys this repository with `npx wrangler deploy`, us
 
 - `"name"` must stay `waltonpowerlines`.
 - `assets.directory` is `.`, so `index.html` at the repository root is the home page.
-- There is no `"main"` script. This version does not use Worker variables or secrets. An assets-only Worker cannot hold them. If a form endpoint is added later, add a script then, and do not commit secrets.
+- `main` is `src/worker.js`. `assets.run_worker_first` is only `/api/contact` and `/api/contact/`. Every other path is a static asset.
+- An assets-only Worker cannot hold variables. `"main"` is what makes `CONTACT_EMAIL` and `RESEND_API_KEY` possible. Do not put those values in this repository.
 
 Custom DNS for waltonpowerlines.com is not part of this repository. Attach the domain in Cloudflare after the Worker exists.
 
+`CONTACT_EMAIL` and `RESEND_API_KEY` are Worker variables or secrets. Do not commit them. Mail goes out through the Resend HTTP API. The From address is Resend's free onboarding sender, `Walton Power Lines <onboarding@resend.dev>`, which can deliver only to the email address on the Resend account until a domain is verified. Keep `CONTACT_EMAIL` set to that same address. After a domain is verified, change `FROM` in `src/contact.js`.
+
+After this change is merged and deployed:
+
+1. Open **Workers & Pages** → **waltonpowerlines** → **Settings** → **Variables and Secrets**.
+2. Set `CONTACT_EMAIL` for Production to the Resend account address. Add it for Preview too if that environment is offered.
+3. Add `RESEND_API_KEY` as a secret, without a `Bearer` prefix. Add it for Preview too if that environment is offered.
+4. Redeploy after saving so the Worker picks up the secret.
+
+Until those values are set, `POST /api/contact` returns HTTP 503. The form still displays. The page does not show an email address.
+
 ## Logo
 
-The header, favicon, and social image use a placeholder: the words “Walton Power Lines” plus a simple pole-to-conduit mark. Marc will supply the real logo. Replace `favicon.svg`, the PNG and ICO favicons, `images/og.png`, and the inline mark in `header.js` when that file arrives.
+The header uses `images/logo-lockup.png` (the circular mark, wordmark, and tagline, with the flat white field removed). Favicons, the apple-touch icon, and `images/og.png` use the circular mark. Alt text on the header image is “Walton Power Lines”.
 
-## Contact address
+## Photographs
 
-The public address in the footer and on `/get-involved/` is `hello@waltonpowerlines.com`. It is a placeholder until a mailbox is connected. Change it in `footer.js`, `get-involved/index.html`, and `site.js` together.
+The photos are existing Wikimedia Commons files, resized and compressed for the web. Captions on the pages name the photographer and license.
+
+- Homepage: [Traffic light at CR 30A and US 98 in Inlet Beach](https://commons.wikimedia.org/wiki/File:Traffic_light_at_CR30A_and_US98_in_Inlet_Beach.jpg), The Bushranger, CC BY-SA 4.0. Daytime roadside at the east end of Scenic Highway 30A, with overhead lines in the frame. A dusk frame of this same junction was not available under a free license.
+- Why: [Grayton Beach](https://commons.wikimedia.org/wiki/File:Grayton_beach.jpg), Larry D. Moore, CC BY 4.0.
+- Where to start: [CR 30A bridge over Western Lake](https://commons.wikimedia.org/wiki/File:CR30A_bridge_over_Western_Lake.jpg), The Bushranger, CC BY-SA 4.0.
+- Get involved: [Miramar Beach, Florida](https://commons.wikimedia.org/wiki/File:Miramar_Beach,_Florida.JPG), Skye Marthaler, CC BY-SA 4.0.
 
 ## Pages
 
@@ -57,7 +72,7 @@ The public address in the footer and on `/get-involved/` is `hello@waltonpowerli
 - `/examples/` — sourced programs elsewhere
 - `/maps/` — a schematic only
 - `/documents/` — empty library
-- `/get-involved/` — mailto interest form
+- `/get-involved/` — interest form. It posts to `/api/contact`
 
 ## Example sources used
 
