@@ -1,14 +1,19 @@
 {
-  // Cloudflare Worker static assets for waltonpowerlines.com.
-  // Keep this name. A Workers Builds project deploys the Worker it is tied to.
-  // This version is assets-only: the interest form opens the visitor's email app.
-  // An assets-only Worker cannot hold variables or secrets. If a form endpoint is
-  // added later, add "main" and do not put secrets in this file.
+  // Cloudflare Worker plus static assets. The name stays waltonpowerlines so
+  // the existing Workers Builds project keeps deploying this repository.
+  // An assets-only Worker has no script, so Cloudflare refuses variables
+  // ("Variables cannot be added to a Worker that only has static assets").
+  // "main" is what makes CONTACT_EMAIL and RESEND_API_KEY possible.
+  // Do not put those values here.
   "name": "waltonpowerlines",
+  "main": "src/worker.js",
   "compatibility_date": "2026-09-30",
   "assets": {
     "directory": ".",
+    "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    // Only the contact route invokes the Worker. Static pages stay on the asset path.
+    "run_worker_first": ["/api/contact", "/api/contact/"]
   }
 }

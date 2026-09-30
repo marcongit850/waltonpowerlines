@@ -61,6 +61,9 @@ assert.match(robots, /Sitemap: https:\/\/waltonpowerlines\.com\/sitemap\.xml/);
 
 const wrangler = readFileSync("wrangler.jsonc", "utf8");
 assert.match(wrangler, /"name": "waltonpowerlines"/);
+assert.match(wrangler, /"main": "src\/worker\.js"/);
+assert.match(wrangler, /\/api\/contact/);
+assert.equal(wrangler.includes("re_"), false);
 
 const examples = readFileSync("examples/index.html", "utf8");
 for (const host of [
@@ -75,12 +78,62 @@ for (const host of [
 }
 
 const involved = readFileSync("get-involved/index.html", "utf8");
-assert.match(involved, /mailto:hello@waltonpowerlines\.com/);
+assert.match(involved, /action="\/api\/contact"/);
 assert.match(involved, /feasibility study/);
-assert.match(readFileSync("site.js", "utf8"), /mailto:/);
+assert.match(involved, />Submit</);
+assert.equal(involved.includes("mailto:"), false);
+assert.equal(involved.includes("hello@"), false);
+assert.equal(involved.includes("No account is required"), false);
 
-for (const asset of ["favicon.svg", "favicon.ico", "favicon-16x16.png", "favicon-32x32.png", "apple-touch-icon.png", "images/og.png"]) {
+const site = readFileSync("site.js", "utf8");
+assert.match(site, /\/api\/contact/);
+assert.equal(site.includes("mailto:"), false);
+assert.match(site, /Thank you\. Your note is on its way\./);
+
+assert.equal(footer.includes("mailto:"), false);
+assert.equal(footer.includes("hello@"), false);
+assert.equal(footer.includes("Updated September"), false);
+assert.match(footer, /not an official Walton County project/);
+
+const header = readFileSync("header.js", "utf8");
+assert.match(header, /alt="Walton Power Lines"/);
+assert.match(header, /images\/logo-lockup\.png/);
+
+const faq = readFileSync("faq/index.html", "utf8");
+assert.match(faq, /<h1>Common questions<\/h1>/);
+assert.match(faq, /Short answers about phased undergrounding in Walton County\./);
+assert.equal(faq.includes("limits left in"), false);
+assert.equal(faq.includes("someone else’s data"), false);
+
+assert.match(home, /images\/hero-inlet-beach\.jpg/);
+assert.match(readFileSync("why/index.html", "utf8"), /images\/why-grayton-beach\.jpg/);
+assert.match(readFileSync("examples/index.html", "utf8"), /example-mark/);
+
+for (const asset of [
+  "favicon.ico",
+  "favicon-16x16.png",
+  "favicon-32x32.png",
+  "apple-touch-icon.png",
+  "images/og.png",
+  "images/logo-lockup.png",
+  "images/hero-inlet-beach.jpg",
+  "images/why-grayton-beach.jpg",
+  "images/where-western-lake.jpg",
+  "images/involved-miramar-beach.jpg",
+  "src/worker.js",
+  "src/contact.js"
+]) {
   assert.ok(existsSync(asset), asset);
+}
+
+assert.equal(existsSync("favicon.svg"), false);
+
+const banned = ["hello@waltonpowerlines.com", "mailto:", "Updated September", "No account is required"];
+for (const file of ["index.html", "footer.js", "header.js", "site.js", "get-involved/index.html", "faq/index.html", "README.md", "styles.css"]) {
+  const text = readFileSync(file, "utf8");
+  for (const phrase of banned) {
+    assert.equal(text.includes(phrase), false, file + " contains " + phrase);
+  }
 }
 
 const pkg = JSON.parse(readFileSync("package.json", "utf8"));
