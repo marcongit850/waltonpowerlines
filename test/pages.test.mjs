@@ -140,6 +140,17 @@ assert.match(map, /Bay County/);
 assert.match(readFileSync("why/index.html", "utf8"), /images\/why-grayton-beach\.jpg/);
 assert.match(readFileSync("examples/index.html", "utf8"), /example-mark/);
 
+const how = readFileSync("how-it-works/index.html", "utf8");
+assert.equal(how.includes("This drawing is a teaching sketch"), false);
+assert.equal(how.includes("not a before-and-after photo"), false);
+assert.equal(how.includes("pole-to-pad"), false);
+assert.equal(how.includes("Pole and wires"), false);
+assert.equal(how.includes("Pad-mounted box"), false);
+assert.match(how, /Overhead today/);
+assert.match(how, /After undergrounding/);
+assert.match(how, /The drawing is not to scale/);
+assert.equal(readFileSync("styles.css", "utf8").includes(".pole-to-pad"), false);
+
 for (const asset of [
   "favicon.ico",
   "favicon-16x16.png",

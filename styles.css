@@ -415,26 +415,6 @@ a:hover { color: var(--navy); }
   padding: 1.15rem 1rem 0.9rem;
 }
 
-.pole-to-pad {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem 1.2rem;
-  list-style: none;
-  margin: 0 0 0.8rem;
-  padding: 0;
-  color: var(--navy);
-  font-size: 0.92rem;
-  font-weight: 700;
-}
-
-.pole-to-pad li { display: flex; align-items: center; gap: 0.45rem; }
-
-.mini {
-  width: 36px;
-  height: 28px;
-  flex: none;
-}
-
 .section:has(.photo-break),
 .section:has(.photo-band) { padding-bottom: 0.3rem; }
 
