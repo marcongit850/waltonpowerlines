@@ -19,8 +19,9 @@ const pages = [
 const home = readFileSync("index.html", "utf8");
 assert.match(home, /<h1>A Case for Studying Underground Power Lines in Walton County<\/h1>/);
 assert.match(home, /<p class="subhead">Exploring a practical, phased approach to moving overhead utilities underground — one corridor and community at a time\.<\/p>/);
-assert.match(home, /<h2>Contact Us<\/h2>/);
-assert.match(home, /href="contact\/">Contact Us</);
+assert.equal(home.includes("<h2>Contact Us</h2>"), false);
+assert.equal(home.includes("It is not a vote, a petition to the commission, or a pledge of money."), false);
+assert.match(home, /class="btn btn-ghost" href="contact\/">Contact Us</);
 assert.equal(home.includes("Get involved"), false);
 assert.equal(home.includes("get-involved"), false);
 assert.equal(home.includes("An independent civic explainer"), false);
@@ -167,7 +168,39 @@ assert.equal(start.includes("Miramar Beach is at the western end"), false);
 assert.match(start, /not the western end of Scenic Highway 30A/);
 assert.match(start, /near Dune Allen/);
 assert.match(start, /Miramar Beach lies west of the 30A corridor/);
-assert.match(start, /CHELCO/);
+assert.match(start, /CHELCO likely serves essentially all of Scenic Highway 30A/);
+assert.equal(start.includes("Inlet Beach area"), false);
+assert.equal(start.includes("not one utility from Dune Allen"), false);
+const phased = readFileSync("phased-approach/index.html", "utf8");
+assert.equal(phased.includes("from Miramar Beach to Inlet Beach"), false);
+assert.equal(phased.includes("FPL near Inlet Beach"), false);
+assert.match(phased, /does not run to Miramar Beach/);
+assert.match(phased, /not the west end of that road/);
+assert.match(phased, /CHELCO likely serves essentially all of that road/);
+const costPage = readFileSync("cost-funding/index.html", "utf8");
+assert.equal(costPage.includes("Inlet Beach"), false);
+assert.match(costPage, /CHELCO likely serves essentially all of Scenic Highway 30A/);
+assert.match(costPage, /not the default for that corridor/);
+const faqOwnership = readFileSync("faq/index.html", "utf8");
+assert.equal(faqOwnership.includes("Inlet Beach"), false);
+assert.match(faqOwnership, /CHELCO likely serves essentially all of Scenic Highway 30A/);
+for (const file of [
+  "index.html",
+  "why/index.html",
+  "how-it-works/index.html",
+  "examples/index.html",
+  "maps/index.html"
+]) {
+  assert.match(readFileSync(file, "utf8"), /likely serves essentially all/, file);
+}
+for (const [file] of pages) {
+  const html = readFileSync(file, "utf8");
+  const blocks = html.split(/<(?:p|li|figcaption|h[1-6]|text|desc|td)\b[^>]*>/i);
+  for (const part of blocks) {
+    const pairsInletWithFpl = part.includes("Inlet Beach") && /FPL|Florida Power/.test(part);
+    assert.equal(pairsInletWithFpl, false, file + " pairs Inlet Beach with FPL");
+  }
+}
 const map = readFileSync("maps/index.html", "utf8");
 assert.match(map, /West is toward Miramar Beach/);
 assert.equal(map.includes("West is toward Inlet Beach"), false);
