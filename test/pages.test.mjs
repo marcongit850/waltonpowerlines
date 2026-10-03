@@ -138,6 +138,8 @@ assert.equal(faq.includes("limits left in"), false);
 assert.equal(faq.includes("someone else’s data"), false);
 
 assert.match(home, /images\/hero-inlet-beach\.jpg/);
+assert.match(home, /images\/walton-hero-side\.mp4/);
+assert.equal(/<video\b[^>]*\bautoplay\b/i.test(home), false);
 assert.match(home, /What is actually being proposed\?/);
 assert.match(home, /A feasibility study — not a construction project\./);
 assert.match(home, /No construction project, tax, assessment, budget, utility commitment, or schedule has been adopted\./);
@@ -231,6 +233,8 @@ for (const asset of [
   "images/og.png",
   "images/logo-lockup.png",
   "images/hero-inlet-beach.jpg",
+  "images/walton-hero-side.mp4",
+  "images/walton-hero-side-poster.jpg",
   "images/why-grayton-beach.jpg",
   "images/where-western-lake.jpg",
   "images/involved-miramar-beach.jpg",
