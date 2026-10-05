@@ -49,7 +49,7 @@ Until those values are set, `POST /api/contact` returns HTTP 503. The form still
 
 ## Logo
 
-The header uses `images/logo-lockup.png` (the circular mark, wordmark, and tagline, with the flat white field removed). Favicons, the apple-touch icon, and `images/og.png` use the circular mark. Alt text on the header image is “Walton Power Lines”.
+The header uses `images/logo-lockup.png`, the full lockup: power poles and buried lines, WALTON PowerLines.com, and the line “A Phased Approach to Underground Utilities.” The image sits on the left, shown in full with `object-fit: contain` and no separate wordmark beside it. Favicons, the apple-touch icon, and `images/og.png` use the circular mark. Alt text on the header image is “Walton Power Lines”.
 
 ## Pages
 

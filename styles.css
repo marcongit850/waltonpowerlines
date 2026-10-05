@@ -90,12 +90,18 @@ a:hover { color: var(--navy); }
 
 .brand-lockup {
   display: block;
-  width: min(250px, calc(100vw - 8.5rem));
-  height: auto;
+  width: auto;
+  height: 4.75rem;
+  max-width: calc(100vw - 8.5rem);
+  object-fit: contain;
+  object-position: left center;
 }
 
 @media (min-width: 1040px) {
-  .brand-lockup { width: 300px; }
+  .brand-lockup {
+    height: 6.75rem;
+    max-width: 20rem;
+  }
 }
 
 .menu-toggle {
