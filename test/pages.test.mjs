@@ -41,6 +41,10 @@ for (const [file, canonical] of pages) {
   assert.match(html, /styles\.css/, file);
   assert.match(html, /id="content"/, file);
   assert.match(html, /property="og:title"|name="robots" content="noindex"/, file);
+  const head = html.slice(0, html.indexOf("</head>"));
+  assert.equal((head.match(/googletagmanager\.com\/gtag\/js\?id=G-1QRFW2P1NF/g) || []).length, 1, file + " gtag src");
+  assert.equal((head.match(/gtag\('config', 'G-1QRFW2P1NF'\)/g) || []).length, 1, file + " gtag config");
+  assert.equal((html.match(/G-1QRFW2P1NF/g) || []).length, 2, file + " measurement id count");
   if (canonical) {
     assert.ok(html.includes(canonical), file + " canonical");
   }
